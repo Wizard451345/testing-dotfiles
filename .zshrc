@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
+plugins=(git command-not-found debian fzf thefuck)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -88,7 +88,7 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-export EDITOR=/usr/bin/nvim
+
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -101,58 +101,64 @@ export EDITOR=/usr/bin/nvim
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-$RANGERCD && unset RANGERCD && ranger_cd
+# $RANGERCD && unset RANGERCD && ranger_cd
+
+# Auto cd's ranger!
 alias ranger='. ranger'
 
-if [[ -d "$HOME/.local/bin" && -d "$HOME/.cargo/bin" ]]
+# Add the dirs to path if exists
+if [[ -d "$HOME/.local/bin" ]]
 then
-    export PATH=$PATH:$HOME/.local/bin && export PATH=$PATH:$HOME/.cargo/bin
+    export PATH=$PATH:$HOME/.local/bin
 fi
+
+if [[ -d "$HOME/.cargo/bin" ]]
+then
+    export PATH=$PATH:$HOME/.cargo/bin
+fi
+
+
+# ARCH / PACMAN BASED SHORTCUTS from ARCH WIKI
+#alias pacsys="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
+#alias pacpkgs="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
 
 alias src='source ~/.zshrc'
 alias :q='exit'
-alias pacsys="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
-alias pacpkgs="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
+alias t='todo-txt'
+alias i3-config='vim ~/.config/i3/config'
+alias cdconfig='cd ~/.config'
 alias vim='nvim'
 alias grep='grep --color=auto'
+alias cls='clear'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias editzsh='vim ~/.zshrc'
 
-# kdesrc-build #################################################################
+#thefuck stuff
+eval $(thefuck --alias)
 
-## Add kdesrc-build to PATH
-export PATH="$HOME/kde/src/kdesrc-build:$PATH"
+#NVIM
+export EDITOR=/usr/local/bin/nvim
 
+#Colored Man pages
+export LESS_TERMCAP_mb=$'\e[1;32m' #31red,32Gr,33Yel...0nor,1Bol,4Und.
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-## Autocomplete for kdesrc-run
-function _comp_kdesrc_run
-{
-  local cur
-  COMPREPLY=()
-  cur="${COMP_WORDS[COMP_CWORD]}"
+# I forgot what this alias does... I think 1st: mkdir dotfiles and then `git init --bare $HOME/dotfiles`
+# 2nd: `dotfiles config --local status.showUntrackedFiles no` -- Prevents any prompt created because of untracked file.
+#
+# Adding remote repo:
+# dotfiles remote add origin <repo_link>
+#
+# Adding Files:
+# `dotfiles add <pathToFile/fileName>`
+# dotfiles commit -m "Test"
+# dotfiles push -u origin <branch_name>
 
-  # Complete only the first argument
-  if [[ $COMP_CWORD != 1 ]]; then
-    return 0
-  fi
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-  # Retrieve build modules through kdesrc-run
-  # If the exit status indicates failure, set the wordlist empty to avoid
-  # unrelated messages.
-  local modules
-  if ! modules=$(kdesrc-run --list-installed);
-  then
-      modules=""
-  fi
-
-  # Return completions that match the current word
-  COMPREPLY=( $(compgen -W "${modules}" -- "$cur") )
-
-  return 0
-}
-
-## Register autocomplete function
-complete -o nospace -F _comp_kdesrc_run kdesrc-run
-
-################################################################################
-
-autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
+export PATH=$PATH:$HOME/git/lua-language-server/bin/
