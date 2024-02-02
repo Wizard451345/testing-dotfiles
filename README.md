@@ -4,10 +4,12 @@ My Dotfiles ( for now )
 ## This repo contains:
 
 ### Config files for:
-
- - MPD
- - NCMPCPP
- - WEZTERM
+- I3 with scripts from endeavouros-i3wm configuration and rofi from adi1090x in GitHub
+- AWESOME (YORU) by rxyhn. Modified for Debian. Unsure if it works yet though. 
+- MPD for YORU
+- NCMPCPP for YORU
+- WEZTERM for YORU
+- mpDris2 for YORU
 
 ### FONTS (VERY BIG WOW)
 - AESTHETIC IOSEVKA
