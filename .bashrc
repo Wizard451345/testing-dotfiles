@@ -70,131 +70,138 @@ completions=(
 		    bashmarks
 	    )
 
-	    source $OSH/oh-my-bash.sh
+source $OSH/oh-my-bash.sh
 
-	    # User configuration
-	     export MANPATH="/usr/local/man:$MANPATH"
+# User configuration
+export MANPATH="/usr/local/man:$MANPATH"
 
-	     # You may need to manually set your language environment
-	     # export LANG=en_US.UTF-8
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
-	     # Preferred editor for local and remote sessions
-	     # if [[ -n $SSH_CONNECTION ]]; then
-	     #   export EDITOR='vim'
-	     # else
-	     #   export EDITOR='mvim'
-	     # fi
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
-	     # Compilation flags
-	     # export ARCHFLAGS="-arch x86_64"
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-	     # ssh
-	     # export SSH_KEY_PATH="~/.ssh/rsa_id"
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-	     # Set personal aliases, overriding those provided by oh-my-bash libs,
-	     # plugins, and themes. Aliases can be placed here, though oh-my-bash
-	     # users are encouraged to define aliases within the OSH_CUSTOM folder.
-	     # For a full list of active aliases, run `alias`.
-	     #
-	     # Example aliases
-	     # alias bashconfig="mate ~/.bashrc"
-	     # alias ohmybash="mate ~/.oh-my-bash"
+# Set personal aliases, overriding those provided by oh-my-bash libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-bash
+# users are encouraged to define aliases within the OSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias bashconfig="mate ~/.bashrc"
+# alias ohmybash="mate ~/.oh-my-bash"
 
-	     #---------------------------------------------#
+#---------------------------------------------#
 
-	     #Pywal
-	     # Import colorscheme from 'wal' asynchronously
-	     # &   # Run the process in the background.
-	     # ( ) # Hide shell job control messages.
-	     # Not supported in the "fish" shell.
-	     (cat ~/.cache/wal/sequences &)
+#Pywal
+# Import colorscheme from 'wal' asynchronously
+# &   # Run the process in the background.
+# ( ) # Hide shell job control messages.
+# Not supported in the "fish" shell.
+(cat ~/.cache/wal/sequences &)
 
-	     # Alternative (blocks terminal for 0-3ms)
-	     cat ~/.cache/wal/sequences
+# Alternative (blocks terminal for 0-3ms)
+cat ~/.cache/wal/sequences
 
-	     # To add support for TTYs this line can be optionally added.
-	     source ~/.cache/wal/colors-tty.sh
+# To add support for TTYs this line can be optionally added.
+if [[ -d "$HOME/.cache/wal/" ]]
+then
+ source ~/.cache/wal/colors-tty.sh
+fi
 
-	     #---------------------------------------------#
+#---------------------------------------------#
 
-	     #Cargo
-	     . "$HOME/.cargo/env"
+#Cargo
+if [[ -d "$HOME./cargo" ]]
+then
+  . "$HOME/.cargo/env" #Add cargo to PATH! 
+fi
 
-	     #Fzf
-	     [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+#Fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-	     #The Fuck Config
-	     eval "$(thefuck --alias)"
+#The Fuck Config
+eval "$(thefuck --alias)"
 
-	     #Vim
-	     export EDITOR=/usr/bin/nvim
+#Vim
+export EDITOR=/usr/bin/nvim
 
-	     #Color Names!
-	     txtblk='\[\e[0;30m\]' # Black - Regular
-	     txtred='\[\e[0;31m\]' # Red
-	     txtgrn='\[\e[0;32m\]' # Green
-	     txtylw='\[\e[0;33m\]' # Yellow
-	     txtblu='\[\e[0;34m\]' # Blue
-	     txtpur='\[\e[0;35m\]' # Purple
-	     txtcyn='\[\e[0;36m\]' # Cyan
-	     txtwht='\[\e[0;37m\]' # White
-	     bldblk='\[\e[1;30m\]' # Black - Bold
-	     bldred='\[\e[1;31m\]' # Red
-	     bldgrn='\[\e[1;32m\]' # Green
-	     bldylw='\[\e[1;33m\]' # Yellow
-	     bldblu='\[\e[1;34m\]' # Blue
-	     bldpur='\[\e[1;35m\]' # Purple
-	     bldcyn='\[\e[1;36m\]' # Cyan
-	     bldwht='\[\e[1;37m\]' # White
-	     unkblk='\[\e[4;30m\]' # Black - Underline
-	     undred='\[\e[4;31m\]' # Red
-	     undgrn='\[\e[4;32m\]' # Green
-	     undylw='\[\e[4;33m\]' # Yellow
-	     undblu='\[\e[4;34m\]' # Blue
-	     undpur='\[\e[4;35m\]' # Purple
-	     undcyn='\[\e[4;36m\]' # Cyan
-	     undwht='\[\e[4;37m\]' # White
-	     bakblk='\[\e[40m\]'   # Black - Background
-	     bakred='\[\e[41m\]'   # Red
-	     badgrn='\[\e[42m\]'   # Green
-	     bakylw='\[\e[43m\]'   # Yellow
-	     bakblu='\[\e[44m\]'   # Blue
-	     bakpur='\[\e[45m\]'   # Purple
-	     bakcyn='\[\e[46m\]'   # Cyan
-	     bakwht='\[\e[47m\]'   # White
-	     txtrst='\[\e[0m\]'    # Text Reset
+#Color Names. NOTE: I dont remember where I stole and use this. May be unused. Maybe for prompt names?
+txtblk='\[\e[0;30m\]' # Black - Regular
+txtred='\[\e[0;31m\]' # Red
+txtgrn='\[\e[0;32m\]' # Green
+txtylw='\[\e[0;33m\]' # Yellow
+txtblu='\[\e[0;34m\]' # Blue
+txtpur='\[\e[0;35m\]' # Purple
+txtcyn='\[\e[0;36m\]' # Cyan
+txtwht='\[\e[0;37m\]' # White
+bldblk='\[\e[1;30m\]' # Black - Bold
+bldred='\[\e[1;31m\]' # Red
+bldgrn='\[\e[1;32m\]' # Green
+bldylw='\[\e[1;33m\]' # Yellow
+bldblu='\[\e[1;34m\]' # Blue
+bldpur='\[\e[1;35m\]' # Purple
+bldcyn='\[\e[1;36m\]' # Cyan
+bldwht='\[\e[1;37m\]' # White
+unkblk='\[\e[4;30m\]' # Black - Underline
+undred='\[\e[4;31m\]' # Red
+undgrn='\[\e[4;32m\]' # Green
+undylw='\[\e[4;33m\]' # Yellow
+undblu='\[\e[4;34m\]' # Blue
+undpur='\[\e[4;35m\]' # Purple
+undcyn='\[\e[4;36m\]' # Cyan
+undwht='\[\e[4;37m\]' # White
+bakblk='\[\e[40m\]'   # Black - Background
+bakred='\[\e[41m\]'   # Red
+badgrn='\[\e[42m\]'   # Green
+bakylw='\[\e[43m\]'   # Yellow
+bakblu='\[\e[44m\]'   # Blue
+bakpur='\[\e[45m\]'   # Purple
+bakcyn='\[\e[46m\]'   # Cyan
+bakwht='\[\e[47m\]'   # White
+txtrst='\[\e[0m\]'    # Text Reset
 
-	     #Prompt Colors
-	     atC="${txtpur}"
-	     nameC="${txtpur}"
-	     hostC="${txtpur}"
-	     pathC="${txtgrn}"
-	     gitC="${txtpur}"
-	     pointerC="${txtgrn}"
-	     normalC="${txtwht}"
+#Prompt Colors
+atC="${txtpur}"
+nameC="${txtpur}"
+hostC="${txtpur}"
+pathC="${txtgrn}"
+gitC="${txtpur}"
+pointerC="${txtgrn}"
+normalC="${txtwht}"
 
-	     alias ls='lsd'
+#WARN: LSD must be installed!
+alias ls='lsd'
 
-	     #Red name for root must copy to /root!!
-	     if [ "${UID}" -eq "0" ]; then
-		       nameC="${txtred}"
-	     fi
+#Red name for root must copy to /root!!
+if [ "${UID}" -eq "0" ]; then
+  nameC="${txtred}"
+fi
 
-	     export PATH=$PATH:/home/pi
+#ADD Home dir to PATH?
+export PATH=$PATH:/home/pi
 
-	     alias ranger='. ranger'
+alias ranger='. ranger'
 
-	     #!/bin/bash
+# Add .local/bin if exists
+if [[ -d "$HOME/.local/bin" ]]
+then
+  export PATH=$PATH:$HOME/.local/bin
+fi
 
-	     if [[ -d "$HOME/.local/bin" ]]
-	     then
-		         export PATH=$PATH:$HOME/.local/bin
-	     fi
-
-	     alias src='source ~/.bashrc'
-	     alias :q='exit'
-	     alias pacsys="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
-	     alias pacpkgs="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
-	     alias vim='nvim'
-	     alias grep='grep --color=auto'
-	     alias pacman='pacman --color=auto' 
+alias src='source ~/.bashrc'
+alias :q='exit'
+alias pacsys="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
+alias pacpkgs="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
+alias vim='nvim'
+alias grep='grep --color=auto'
+alias pacman='pacman --color=auto' 
